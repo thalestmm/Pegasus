@@ -30,7 +30,7 @@ class GrametScraper:
         if error_message in center.parent.text:
             return None
 
-        base_url = "https://www.ogimet.com/"
+        base_url = "https://www.ogimet.com"
         image_source = center.findChild('img').attrs['src']
 
         return base_url + image_source

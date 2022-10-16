@@ -210,8 +210,11 @@
         <br>
         {% if gramet_url != False %}
         <div id="grametContainer" class="container-fluid justify-content-center">
-            <img id="gramet" src="{{ gramet_url }}">
+            <img id="gramet" src="{{ gramet_url }}" width="100%">
         </div>
+        <br>
+        {% else %}
+        <p class="text-center" style="font-size: 20px; font-weight: 600;">GRAMET indisponível</p>
         <br>
         {% endif %}
     </div>
