@@ -1,0 +1,190 @@
+{% extends 'main/base.html' %}
+
+{% block title %}Missão{% endblock %}
+
+{% block style %}
+{{ block.super }}
+    #project-name {
+        font-weight: 600;
+        font-size: 34px;
+    }
+    .table-wrapper {
+<!--        max-height: 34vh;-->
+        overflow: hidden;
+        display:inline-block;
+    }
+    h4 {
+        font-size: 20px;
+    }
+    .print-button {
+        background-color: #FFC30B;
+        position: absolute;
+        top: 11vh;
+        right: 8vw;
+    }
+    hr {
+        width:90%;
+        margin-left: auto;
+        margin-right: auto;
+        margin-top: 3vh;
+    }
+    .accordion {
+        .accordion-bg {
+            background-color: #252b2f;
+        }
+    }
+    .accordion-toggle {
+        background-color: #121619;
+    }
+    iframe {
+        width: 100%;
+        overflow: auto;
+        height: 70vh;
+        margin-left: auto;
+        margin-right: auto;
+    }
+    @page {
+        size: auto;   /* auto is the initial value */
+        margin: 0;  /* this affects the margin in the printer settings */
+    }
+
+    @media print {
+        body {
+            background-color: #FFFFFF
+            color: #121619;
+        }
+        h2, h4, h3, table, th, td, p, label {
+            color: #121619;
+        }
+        .table {
+            background-color: #FFFFFF;
+            color: #121619;
+        }
+    }
+
+
+{% endblock %}
+
+{% block content %}
+<br>
+<h2 id="project-name" class="text-center" style="font-weight: 600;">{{ project }}</h2>
+<!--<button class='btn print-button d-print-none' value="" onclick="window.print();return false;">-->
+<!--{% load static %}<img src="{% static 'main/media/printing.svg' %}" height="30" width="30">-->
+<!--</button>-->
+
+<div class="table-wrapper container-fluid overflow-auto">
+    <table id="RouteTable" class="table table-dark table-striped align-middle table-sm">
+        <thead>
+            <tr>
+                <th scope="col" class="text-center">#</th>
+                <th scope="col">EOBT</th>
+                <th scope="col">ORG</th>
+                <th scope="col">EST</th>
+                <th scope="col">TEV</th>
+                <th scope="col">ALTN</th>
+                <th scope="col">DISP</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for index, i in rows %}
+            <tr>
+                <th scope="row" class="text-center">{{ index|add:1 }}</th>
+                <td>{{ i.eobt }}</td>
+                {% if i.org_has_fueling %}
+                <td>{{ i.org }}</td>
+                {% else %}
+                <td style="font-weight: 600; color: #FFC30B;">{{ i.org }}</td>
+                {% endif %}
+                {% if i.des_has_fueling %}
+                <td>{{ i.des }}</td>
+                {% else %}
+                <td style="font-weight: 600; color: #FFC30B;">{{ i.des }}</td>
+                {% endif %}
+                <td>{{ i.tev }}</td>
+                {% if i.altn_has_fueling %}
+                <td>{{ i.altn }}</td>
+                {% else %}
+                <td style="font-weight: 600; color: #FFC30B;">{{ i.altn }}</td>
+                {% endif %}
+                {% if i.disp < 0 %}
+                <td style="font-weight: 600; color: #FF0000;">{{ i.disp }}</td>
+                {% else %}
+                <td>{{ i.disp }}</td>
+                {% endif %}
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
+<br>
+<h4 class="text-center">ESFORÇO AÉREO: <strong>{{ total_hours }}</strong></h4>
+<hr>
+<div id="notam" class="container-fluid col-md-10">
+    <h3 class="text-center" style="font-weight: 600;">NOTAM</h3>
+    <br>
+    <div class="accordion bg-dark text-white" id="notamAccordion" style="background-color: #121619;">
+        {% for airport, data in data_package %}
+      <div class="accordion-item bg-dark text-white" style="background-color: #121619;">
+        <h2 class="accordion-header" id="heading_{{ airport }}" style="background-color: #121619;">
+          <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapse_{{ airport }}" aria-expanded="true" aria-controls="collapseOne">
+              {{ airport }}
+          </button>
+        </h2>
+        <div id="collapse_{{ airport }}" class="accordion-collapse collapse" aria-labelledby="heading_{{ airport }}">
+          <div class="accordion-body" style="color: #F8F7F9;">
+              {% for notam in data.1 %}
+                  {% if notam == False %}
+              <span class="badge bg-danger">NIL</span>
+                  {% else %}
+
+              <span class="badge bg-success">{{ notam.status }}</span>
+              <span class="badge bg-warning" style="color: #121619;">{{ notam.number }}</span>
+              <span class="badge bg-primary">{{ notam.cat }}</span>
+
+              <p style="margin-top: 4px; font-size: 12px; color: gray;">{{ notam.creation }}</p>
+
+              <p class="font-monospace" style="margin-top: 10px; margin-bottom: 10px;">
+                  {{ notam.message }}
+              </p>
+
+              <span class="font-monospace align-items-center" style="font-size: 11px; color: gray;">
+                  <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" fill="currentColor" class="bi bi-calendar-event-fill" viewBox="0 2 16 16">
+                    <path d="M4 .5a.5.5 0 0 0-1 0V1H2a2 2 0 0 0-2 2v1h16V3a2 2 0 0 0-2-2h-1V.5a.5.5 0 0 0-1 0V1H4V.5zM16 14V5H0v9a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2zm-3.5-7h1a.5.5 0 0 1 .5.5v1a.5.5 0 0 1-.5.5h-1a.5.5 0 0 1-.5-.5v-1a.5.5 0 0 1 .5-.5z"/>
+                  </svg>
+                    {{ notam.valid_from }} a {{ notam.valid_til }}
+              </span>
+              <hr style="width: 100%; margin-top: 7px;">
+                  {% endif %}
+              {% endfor %}
+          </div>
+        </div>
+      </div>
+        {% endfor %}
+    </div>
+</div>
+<hr>
+<div id="meteoro" class="container-fluid col-md-10">
+    <h3 class="text-center" style="font-weight: 600;">Meteorologia</h3>
+    <br>
+    <div class="container-fluid justify-content-center">
+        {% for airport, data in meteoro_package %}
+        <div id="meteoro_{{ airport }}" style="color: #F8F7F9;">
+            <h4 class="text-decoration-underline"
+                style="font-size: 23px; margin-bottom: 10px; font-weight: 600;">
+                {{ airport }}
+            </h4>
+            {% for info in data.1 %}
+            <p class="font-monospace" style="margin-bottom: 10px;">{{ info.metar }}</p>
+            <p class="font-monospace">{{ info.taf }}</p>
+            {% endfor %}
+        </div>
+        {% endfor %}
+        <br>
+        <div id="windyContainer" class="container-fluid justify-content-center">
+        <iframe src="https://embed.windy.com/embed2.html?lat=-19.413&lon=-48.081&detailLat=-13.305&detailLon=-52.498&width=600&height=700&zoom=5&level=surface&overlay=rain&product=ecmwf&menu=&message=&marker=true&calendar=now&pressure=&type=map&location=coordinates&detail=&metricWind=kt&metricTemp=%C2%B0C&radarRange=-1" frameborder="0"></iframe>        </div>
+        <br>
+    </div>
+</div>
+
+
+{% endblock %}

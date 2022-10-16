@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <title>{% block title %}Pégaso{% endblock %}</title>
+
+    {% load static %}  <link rel="icon" type="image/x-icon" href="{% static 'main/media/favicon.ico' %}">
+
+    {% load crispy_forms_tags %}
+
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-Zenh87qX5JnK2Jl0vWa8Ck2rdkQ2Bzep5IDxbcnCeuOxjzrPF/et3URy9Bv1WTRi" crossorigin="anonymous">
+
+    <style>
+    {% block style %}
+        body {
+            background-color: #121619;
+        }
+        :root {
+            color-scheme: dark;
+        }
+        h1, h2, h3, h4, p, th, td, label, hr {
+            color: #F8F7F9;
+        }
+        .asteriskField {
+            color: #FFC30B;
+        }
+        .form-control, .form-select {
+            background-color: #252b2f;
+            color: #F8F7F9;
+            border-color: #202427;
+            focus-color: #202427;
+        }
+    {% endblock %}
+    </style>
+</head>
+<body class="bg-dark">
+    {% block navbar %}
+    <nav class="navbar navbar-dark navbar-expand-lg bg-dark d-print-none">
+      <div class="container-fluid">
+        <a class="navbar-brand" href="/">
+            {% load static %}<img src="{% static 'main/media/favicon.ico' %}" alt="" width="32" height="32" class="d-inline-block align-text-center">
+            <strong>Pégaso</strong>
+        </a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+          <div class="navbar-nav">
+            <a class="nav-link active" aria-current="page" href="/">Home</a>
+            <a class="nav-link" href="/planner">Planejamento de Voo</a>
+            <a class="nav-link disabled">Pau de Sebo</a>
+            <a class="nav-link disabled">Lançamento de Relatório</a>
+            <a class="nav-link disabled">RELPREV</a>
+            <a class="nav-link disabled">CARP</a>
+            <a class="nav-link disabled">Tutorial</a>
+          </div>
+        </div>
+      </div>
+    </nav>
+    {% endblock %}
+
+    <div class="container-fluid" id="main">
+    {% block content %}
+    <h1 class="text-center">Home Page</h1>
+    {% endblock %}
+    </div>
+
+    {% block footer %}
+    <footer>
+
+    </footer>
+    {% endblock %}
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-OERcA2EqjJCMA+/3y+gxIOqMEjwtxJY7qPCqsdltbNJuaOe923+mo//f6V8Qbsw3" crossorigin="anonymous"></script>
+<!--     POPPER SCRIPTS -->
+<!--    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js" integrity="sha384-oBqDVmMz9ATKxIep9tiCxS/Z9fNfEXiDAYTujMAeBAsjFuCZSmKbSSUnQlmh/jp3" crossorigin="anonymous"></script>-->
+<!--    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/js/bootstrap.min.js" integrity="sha384-IDwe1+LCz02ROU9k972gdyvl+AESN10+x7tBKgc9I5HFtuNz0wWnPclzo6p9vxnk" crossorigin="anonymous"></script>-->
+</body>
+</html>

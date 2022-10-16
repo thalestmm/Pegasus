@@ -1,0 +1,94 @@
+{% extends "main/base.html" %}
+
+{% block title %}Planejamento de Voo{% endblock %}
+
+{% load crispy_forms_tags %}
+
+{% block style %}
+{{ block.super }}
+    .table-wrapper {
+        max-height: 34vh;
+        overflow: auto;
+        display:inline-block;
+    }
+{% endblock %}
+
+{% block content %}
+<br>
+<h1 class="text-center">Planejamento de Voo</h1>
+<br>
+<div class="container-fluid col-lg-6">
+<form id="masterForm" method="post" action="#">
+    {% csrf_token %}
+    <div class="row g-3">
+      <div class="col">
+          <label for="project" class="form-label">Projeto</label>
+          <select id="project" class="form-select" aria-label="Projeto" name="project">
+              {% for project in projects %}
+                <option>{{ project }}</option>
+              {% endfor %}
+          </select>
+      </div>
+      <div class="col">
+        <label for="PesoTrip" class="form-label">Peso Trip</label>
+        <input id="PesoTrip" type="text" class="form-control" aria-label="Peso Trip" value="300" name="trip_weight">
+      </div>
+      <div class="col">
+        <label for="TakeoffTime" class="form-label">Horário de DEP</label>
+        <input id="TakeoffTime" type="time" class="form-control" required
+               aria-label="Horário de DEP" value="12:00" name="takeoff_time">
+      </div>
+    </div>
+
+    <br>
+    <h3 class="text-center">Rota</h3>
+    <br>
+    <div class="table-wrapper container-fluid">
+    <table id="RouteTable" class="table table-dark table-striped align-middle">
+        <thead>
+            <tr>
+                <th scope="col" class="text-center">#</th>
+                <th scope="col">DEP</th>
+                <th scope="col">ARR</th>
+                <th scope="col">ALTN</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for i in rows %}
+            <tr>
+                <th scope="row" class="text-center">{{ i|add:"1" }}</th>
+                <td>
+                    <input id="dep_{{ i }}" name="dep_{{ i }}" type="text" class="form-control"
+                           maxlength="4" oninput="this.value = this.value.toUpperCase()">
+                </td>
+                <td>
+                    <input id="arr_{{ i }}" name="arr_{{ i }}" type="text" class="form-control"
+                           maxlength="4" oninput="this.value = this.value.toUpperCase()">
+                </td>
+                <td>
+                    <input id="alt_{{ i }}" name="alt_{{ i }}" type="text" class="form-control"
+                           maxlength="4" oninput="this.value = this.value.toUpperCase()">
+                </td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+    </div>
+    <br>
+
+    <div class="d-grid col-1 mx-auto">
+      <button id="addRow" class="btn btn-light btn-sm" style="border-radius: 12px;" type="button">
+          +
+      </button>
+    </div>
+
+    <br>
+
+    <div class="d-grid gap-2 col-4 mx-auto">
+      <button class="btn btn-warning" type="submit">Enviar</button>
+    </div>
+</form>
+</div>
+{% load static %}<script src="{% static 'mission_planner/scripts/append_row_to_flight_route.js' %}"></script>
+
+{% endblock %}
