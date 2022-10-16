@@ -31,7 +31,7 @@ class FlightPlan:
                 des_ICAO=leg['des'],
                 alt_ICAO=leg['altn']
             )
-            self.working_hours += timedelta(hours=1)
+
             self.export_data.append(output)
 
         self.working_hours += self.total_hours
@@ -197,6 +197,8 @@ class FlightPlan:
         tev = timedelta(hours=main_hours, minutes=main_minutes)
         # UPDATE TOTAL HOURS
         self.total_hours += tev
+        self.working_hours += tev + timedelta(hours=1)
+
         tev = self.prettify_time(tev)
 
         altn = alternative
