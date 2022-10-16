@@ -9,13 +9,14 @@ from math import ceil
 
 class FlightPlan:
     def __init__(self, project: Project, trip_weight: int,
-                 takeoff_time: time, flight_plan_legs: Dict):
+                 takeoff_time: time, flight_plan_legs: Dict,
+                 procedure_time: int = 20):
         self.project = project  # PROJECT INSTANCE FROM FORM
         self.trip_weight = trip_weight
         self.takeoff_time = takeoff_time
         self.flight_plan_legs = flight_plan_legs
 
-        self.procedure_time_minutes = 20
+        self.procedure_time_minutes = procedure_time
 
         self.total_hours   = timedelta(hours=0)
         self.working_hours = timedelta(hours=0)
