@@ -150,7 +150,7 @@ ADMINS = [('Thales', 'meier.thales@gmail.com')]
 CSRF_COOKIE_SECURE = True
 # CSRF_COOKIE_DOMAIN
 
-SESSION_COOKIE_SECURE = True
+SESSION_COOKIE_SECURE = False
 
 SECURE_SSL_REDIRECT = False
 
