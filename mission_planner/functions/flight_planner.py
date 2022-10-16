@@ -35,8 +35,6 @@ class FlightPlan:
 
             self.export_data.append(output)
 
-        self.working_hours += self.total_hours
-
         self.total_hours   = self.prettify_time(self.total_hours)
         self.working_hours = self.prettify_time(self.working_hours)
 
