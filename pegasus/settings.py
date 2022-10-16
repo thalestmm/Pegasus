@@ -143,7 +143,7 @@ CRISPY_ALLOWED_TEMPLATE_PACKS = "bootstrap5"
 CRISPY_TEMPLATE_PACK = "bootstrap5"
 
 # DEPLOY CONFIG
-DEBUG = True
+DEBUG = False
 
 ADMINS = [('Thales', 'meier.thales@gmail.com')]
 
