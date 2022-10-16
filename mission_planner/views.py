@@ -91,6 +91,7 @@ def render_mission(request, form_data, package):
                       {"project": header['project'],
                        "rows": enumerate(fp.export_data),
                        "total_hours": fp.total_hours,
+                       "working_hours": fp.working_hours,
                        "data_package": zip(data_package.keys(), data_package.items()),
                        "empty_list": empty_list,
                        "meteoro_package": zip(meteoro_package.keys(), meteoro_package.items())})

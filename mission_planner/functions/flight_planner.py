@@ -16,7 +16,9 @@ class FlightPlan:
         self.flight_plan_legs = flight_plan_legs
 
         self.procedure_time_minutes = 20
-        self.total_hours = timedelta(hours=0)
+
+        self.total_hours   = timedelta(hours=0)
+        self.working_hours = timedelta(hours=0)
 
         self.all_fpl_airports = []
 
@@ -29,10 +31,13 @@ class FlightPlan:
                 des_ICAO=leg['des'],
                 alt_ICAO=leg['altn']
             )
-
+            self.working_hours += timedelta(hours=1)
             self.export_data.append(output)
 
-        self.total_hours = self.prettify_time(self.total_hours)
+        self.working_hours += self.total_hours
+
+        self.total_hours   = self.prettify_time(self.total_hours)
+        self.working_hours = self.prettify_time(self.working_hours)
 
     def adjust_legs_format(self) -> List[Dict]:
         """
