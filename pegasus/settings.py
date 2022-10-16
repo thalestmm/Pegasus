@@ -31,9 +31,9 @@ SECRET_KEY = os.environ.get("SECRET_KEY")
 
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = False
 
-ALLOWED_HOSTS = ['*','127.0.0.1']
+ALLOWED_HOSTS = ['*']
 
 
 # Application definition
@@ -147,6 +147,6 @@ CRISPY_TEMPLATE_PACK = "bootstrap5"
 # DEPLOY CONFIG
 CSRF_COOKIE_SECURE = True
 
-SESSION_COOKIE_SECURE = False
+SESSION_COOKIE_SECURE = True
 
 SECURE_SSL_REDIRECT = False
