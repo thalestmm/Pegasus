@@ -9,9 +9,12 @@ from .functions.decea_api import DeceaApiConnection
 
 from django.shortcuts import Http404
 
+from django.views.decorators.csrf import csrf_protect
+
 # Create your views here.
 
 
+@csrf_protect
 def planner_form(request):
     available_projects = Project.objects.all()
 
@@ -96,7 +99,7 @@ def render_mission(request, form_data, package):
                        "empty_list": empty_list,
                        "meteoro_package": zip(meteoro_package.keys(), meteoro_package.items())})
 
-    except Exception as e:
+    except IndexError:
         # TODO: HANDLE MISSING ICAO TO EXPLAIN WHY THE STATUS WAS RAISED
         print(e)
         raise Http404()
