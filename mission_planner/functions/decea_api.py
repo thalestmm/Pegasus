@@ -51,6 +51,8 @@ class DeceaApiConnection:
             valid_from = unit.find('b').text
             valid_til  = unit.find('c').text
 
+            period     = unit.find('d').text
+
             try:
                 valid_from = datetime.strptime(valid_from, "%y%m%d%H%M")
                 valid_til = datetime.strptime(valid_til, "%y%m%d%H%M")
@@ -66,6 +68,7 @@ class DeceaApiConnection:
                 'number': number,
                 'valid_from': valid_from,
                 'valid_til': valid_til,
+                'period': period,
                 'message': message
             }
 
