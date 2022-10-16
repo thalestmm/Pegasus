@@ -6,6 +6,7 @@ from .models import Project
 
 from .functions.flight_planner import FlightPlan
 from .functions.decea_api import DeceaApiConnection
+from .functions.gramet_scraping import GrametScraper
 
 from django.shortcuts import Http404
 
@@ -74,6 +75,9 @@ def render_mission(request, form_data, package):
         meteoro_package = {}
         hours_package   = {}
 
+        gramet_scraper = GrametScraper(icao_route=fp.icao_route)
+        gramet_url     = gramet_scraper.gramet_url
+
         empty_list      = []
 
         for airport in fp.all_fpl_airports:
@@ -97,7 +101,8 @@ def render_mission(request, form_data, package):
                        "working_hours": fp.working_hours,
                        "data_package": zip(data_package.keys(), data_package.items()),
                        "empty_list": empty_list,
-                       "meteoro_package": zip(meteoro_package.keys(), meteoro_package.items())})
+                       "meteoro_package": zip(meteoro_package.keys(), meteoro_package.items()),
+                       'gramet_url': gramet_url if gramet_url is not None else False})
 
     except IndexError:
         # TODO: HANDLE MISSING ICAO TO EXPLAIN WHY THE STATUS WAS RAISED

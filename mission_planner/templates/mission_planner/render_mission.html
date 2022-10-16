@@ -43,6 +43,11 @@
         margin-left: auto;
         margin-right: auto;
     }
+    #gramet {
+        width: 100%;
+        margin-left: auto;
+        margin-right: auto;
+    }
     @page {
         size: auto;   /* auto is the initial value */
         margin: 0;  /* this affects the margin in the printer settings */
@@ -200,8 +205,15 @@
         {% endfor %}
         <br>
         <div id="windyContainer" class="container-fluid justify-content-center">
-        <iframe src="https://embed.windy.com/embed2.html?lat=-19.413&lon=-48.081&detailLat=-13.305&detailLon=-52.498&width=600&height=700&zoom=5&level=surface&overlay=rain&product=ecmwf&menu=&message=&marker=true&calendar=now&pressure=&type=map&location=coordinates&detail=&metricWind=kt&metricTemp=%C2%B0C&radarRange=-1" frameborder="0"></iframe>        </div>
+            <iframe src="https://embed.windy.com/embed2.html?lat=-19.413&lon=-48.081&detailLat=-13.305&detailLon=-52.498&width=600&height=700&zoom=5&level=surface&overlay=rain&product=ecmwf&menu=&message=&marker=true&calendar=now&pressure=&type=map&location=coordinates&detail=&metricWind=kt&metricTemp=%C2%B0C&radarRange=-1" frameborder="0"></iframe>
+        </div>
         <br>
+        {% if gramet_url != False %}
+        <div id="grametContainer" class="container-fluid justify-content-center">
+            <img id="gramet" src="{{ gramet_url }}">
+        </div>
+        <br>
+        {% endif %}
     </div>
 </div>
 

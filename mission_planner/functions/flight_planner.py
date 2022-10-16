@@ -26,12 +26,19 @@ class FlightPlan:
         self.adjusted_legs = self.adjust_legs_format()
         self.export_data = []
 
-        for leg in self.adjusted_legs:
+        self.icao_route = []
+
+        for index, leg in enumerate(self.adjusted_legs):
             output = self.leg_full_execution(
                 org_ICAO=leg['org'],
                 des_ICAO=leg['des'],
                 alt_ICAO=leg['altn']
             )
+
+            if index == 0:
+                self.icao_route.append(leg['org'])
+            else:
+                self.icao_route.append(leg['des'])
 
             self.export_data.append(output)
 
