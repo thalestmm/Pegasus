@@ -102,7 +102,7 @@ def render_mission(request, form_data, package):
                        "data_package": zip(data_package.keys(), data_package.items()),
                        "empty_list": empty_list,
                        "meteoro_package": zip(meteoro_package.keys(), meteoro_package.items()),
-                       'gramet_url': gramet_url if gramet_url is not None else False})
+                       'gramet_url': False})
 
     except IndexError:
         # TODO: HANDLE MISSING ICAO TO EXPLAIN WHY THE STATUS WAS RAISED
