@@ -86,8 +86,11 @@
                 <th scope="col">ORG</th>
                 <th scope="col">EST</th>
                 <th scope="col">TEV</th>
+                <th scope="col">ETA</th>
                 <th scope="col">ALTN</th>
                 <th scope="col">DISP</th>
+                <th scope="col">TALT</th>
+                <th scope="col">FUEL</th>
             </tr>
         </thead>
         <tbody>
@@ -106,6 +109,7 @@
                 <td style="font-weight: 600; color: #FFC30B;">{{ i.des }}</td>
                 {% endif %}
                 <td>{{ i.tev }}</td>
+                <td>{{ i.eta }}</td>
                 {% if i.altn_has_fueling %}
                 <td>{{ i.altn }}</td>
                 {% else %}
@@ -116,6 +120,11 @@
                 {% else %}
                 <td>{{ i.disp }}</td>
                 {% endif %}
+                <td>{{ i.talt }}</td>
+                {% if i.min_leg_fuel > max_fuel %}
+                <td style="font-weight: 600; color: #FF0000;">{{ i.min_leg_fuel }}</td>
+                {% else %}
+                <td>{{ i.min_leg_fuel }}</td>
             </tr>
             {% endfor %}
         </tbody>

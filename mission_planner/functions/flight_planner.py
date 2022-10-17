@@ -229,6 +229,7 @@ class FlightPlan:
             'eta': eta,
             'des': des,
             'tev': tev,
+            'min_leg_fuel': min_leg_fuel,
             'altn': altn,
             'talt': talt,
             'disp': disp,

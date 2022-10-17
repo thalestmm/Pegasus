@@ -55,6 +55,8 @@ def planner_form(request):
 def render_mission(request, form_data, package):
     header = form_data
 
+    max_fuel = form_data['project'].max_fuel
+
     extra_data = ['csrfmiddlewaretoken', 'project', 'trip_weight', 'takeoff_time']
 
     package_dict = {c[0]: c[1] for c in package}
@@ -96,6 +98,7 @@ def render_mission(request, form_data, package):
 
         return render(request, "mission_planner/render_mission.html",
                       {"project": header['project'],
+                       "max_fuel": max_fuel,
                        "rows": enumerate(fp.export_data),
                        "total_hours": fp.total_hours,
                        "working_hours": fp.working_hours,
