@@ -20,5 +20,6 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('', include("main.urls")),
     path('planner/', include("mission_planner.urls")),
-    path('ranking/', include("ranking.urls"))
+    path('ranking/', include("ranking.urls")),
+    path('carp/', include("carp.urls")),
 ]
