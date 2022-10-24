@@ -46,6 +46,7 @@ INSTALLED_APPS = [
     'main.apps.MainConfig',
     'mission_planner.apps.MissionPlannerConfig',
     'ranking.apps.RankingConfig',
+    'carp.apps.CarpConfig',
     'crispy_forms',
     'crispy_bootstrap5',
     'django_extensions',
