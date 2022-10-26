@@ -1,14 +1,14 @@
 from django.shortcuts import render
 from .forms import CarpForm
 
+
 # Create your views here.
 
 
 def carp_form(request):
-
     if request.method == "POST":
 
-        form = MissionPlannerForm(
+        form = CarpForm(
             {
                 "project": Project.objects.get(registry=aircraft_registry),
                 "trip_weight": request.POST['trip_weight'],

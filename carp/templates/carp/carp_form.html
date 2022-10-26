@@ -2,20 +2,19 @@
 
 {% block title %}CARP{% endblock %}
 
-<!--{% load crispy_forms_tags %}-->
+{% load crispy_forms_tags %}
 
 {% block content %}
 
 <h1 class="text-center">CARP Calculator</h1>
-
-<form method="post" action="#">
+<br>
+<form id="CarpForm" method="post" action="#">
     {% csrf_token %}
 
 <!--    {{ form }}-->
 
     <button class="btn btn-warning" type="submit">Enviar</button>
 </form>
-
 
 
 {% endblock %}
