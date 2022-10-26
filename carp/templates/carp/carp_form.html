@@ -11,7 +11,7 @@
 <form id="CarpForm" method="post" action="#">
     {% csrf_token %}
 
-<!--    {{ form }}-->
+    {{ form|crispy }}
 
     <button class="btn btn-warning" type="submit">Enviar</button>
 </form>
