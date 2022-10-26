@@ -8,13 +8,17 @@
 
 <h1 class="text-center">CARP Calculator</h1>
 <br>
-<form id="CarpForm" method="post" action="#">
-    {% csrf_token %}
+<div class="container-fluid col-lg-6">
+    <form id="CarpForm" method="post" action="#">
+        {% csrf_token %}
 
-    {{ form|crispy }}
+        {{ form|crispy }}
 
-    <button class="btn btn-warning" type="submit">Enviar</button>
-</form>
+        <div class="d-grid gap-2 col-4 mx-auto">
+          <button class="btn btn-warning" type="submit">Enviar</button>
+        </div>
+    </form>
+</div>
 
 
 {% endblock %}
