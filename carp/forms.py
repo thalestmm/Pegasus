@@ -13,7 +13,7 @@ class CarpForm(forms.Form):
     temperature     = forms.FloatField(label="Temperatura (ºC)")
 
     speed           = forms.IntegerField(label="Velocidade (kt)")
-    mag_course      = forms.IntegerField(label="Eixo de Lançamento (º)")
+    mag_course      = forms.IntegerField(label="Eixo de Lançamento (º)", max_value=360, min_value=0)
 
     # DADOS BALÍSTICOS
     chute_selection = forms.ChoiceField(choices=[
