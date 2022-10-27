@@ -31,7 +31,7 @@ class CarpCalculator:
         for chute in self.parachute_limits:
             self.chute_name_list.append(chute)
 
-        self.chute_selection = self.chute_name_list[values['chute_selection']]
+        self.chute_selection = self.chute_name_list[int(values['chute_selection'])]
         self.chute_amount = int(values['chute_amount'])
         self.rate_of_fall = float(values['rate_of_fall'])
         self.vertical_distance = int(values['vertical_distance'])
@@ -75,10 +75,9 @@ class CarpCalculator:
     # haver defasagem entre velocidade prevista e real
 
     # TRUE AIR SPEED
-    def f_11(self, speed):
-        speed = self.speed
+    def f_11(self):
         difference = 0.4 * self.temperature - 6
-        return ceil(speed + difference)
+        return ceil(self.speed + difference)
 
     # ADJUSTED RATE OF FALL
     def f_13(self) -> int:
@@ -187,11 +186,12 @@ class PDF(FPDF):
         self.wind_circles()  # CÍRCULOS DE VENTO
 
         self.today = date.today()
-        self.output(f'CARP {trigram.upper()} - {self.today}.pdf', 'F')
+        self.filename = f'CARP {trigram.upper()} - {self.today}.pdf'
+        self.output(self.filename, 'F')
 
     def create_basic(self):
-        self.line(25, self.yc, doc_width - 25, self.yc)
-        self.line(self.xc, 64, self.xc, doc_height - 60)
+        self.line(25, self.yc, self.doc_width - 25, self.yc)
+        self.line(self.xc, 64, self.xc, self.doc_height - 60)
         # ARROW
         self.line(self.xc - 2, 64, self.xc, 60)
         self.line(self.xc, 60, self.xc + 2, 64)
@@ -212,11 +212,12 @@ class PDF(FPDF):
         self.text(15,54,f"{self.temperature}°C")
         self.text(15,60,f"{self.drop_height} ft")
         self.text(15,66,f"{self.chute_amount} {self.chute_selection}")
-        self.text(self.doc_width-68,30,f"Limites: {self.parachute_limits[self.chute_selection][0]}kt (D) e {self.parachute_limits[self.chute_selection][1]}kt (N)")
+        self.text(self.doc_width-68,30,f"Limites: {self.parachute_limits[self.chute_selection][0]}kt (D) e "
+                                       f"{self.parachute_limits[self.chute_selection][1]}kt (N)")
 
     def my_footer(self):
         self.set_font("Arial","I",13)
-        self.text(15,self.doc_height-10,f"{self.name.upper()} - {self.today}")
+        self.text(15,self.doc_height-10,f"{self.name.upper()}")
 
     def target(self):
         self.set_font("Arial","B",16)

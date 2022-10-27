@@ -1,4 +1,5 @@
-from django.shortcuts import render
+from django.shortcuts import render, HttpResponse
+from django.http import FileResponse
 from .forms import CarpForm
 from .scripts.carp_calculator import CarpCalculator, PDF
 
@@ -23,8 +24,7 @@ def carp_form(request):
             pdf = PDF(name, trigram, carp_vectors, launch_axis, unit, chute_amount, chute_selection,
                       parachute_limits, pressure, temperature, drop_height, speed)
 
-            # return render_mission(request, form_data=form.cleaned_data, package=request.POST.items())
-            return None
+            return FileResponse(open(pdf.filename, 'rb'), as_attachment=True, filename=pdf.filename)
 
     else:
         form = CarpForm()
