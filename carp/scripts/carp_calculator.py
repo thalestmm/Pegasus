@@ -17,7 +17,7 @@ class CarpCalculator:
         self.pressure = int(values['pressure'])
         self.temperature = float(values['temperature'])
         self.speed = int(values['speed'])
-        self.mag_course = int(values['mag_course'].replace("°","").replace("º",""))
+        self.mag_course = int(values['mag_course'])
 
         self.parachute_limits = {
             "T-10 AC/RAC": [13, 13],

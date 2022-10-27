@@ -149,12 +149,18 @@ DEBUG = True
 ADMINS = [('Thales', 'meier.thales@gmail.com')]
 
 CSRF_COOKIE_SECURE = True
-# CSRF_COOKIE_DOMAIN
 
 SESSION_COOKIE_SECURE = True
 
 SECURE_SSL_REDIRECT = False
 
-# SECURE_HSTS_INCLUDE_SUBDOMAINS = True
-# SECURE_HSTS_PRELOAD = True
-# SECURE_HSTS_SECONDS = 1
+# TEST CONFIG
+
+DEBUG = True
+
+ADMINS = [('Thales', 'meier.thales@gmail.com')]
+
+SESSION_COOKIE_SECURE = False
+CSRF_COOKIE_SECURE = False
+SECURE_SSL_REDIRECT = False
+
