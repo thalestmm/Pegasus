@@ -23,7 +23,7 @@ class CarpForm(forms.Form):
         (3, "G11 A, G12 D"),
         (4, "G13, G14"),
         (5, "STAB")
-    ], initial=1, label="Tipo de Paraquedas")
+    ], initial=0, label="Tipo de Paraquedas")
     chute_amount      = forms.IntegerField(label="Quantidade de Paraquedas", initial=1)
     rate_of_fall      = forms.FloatField(label="Rate of Fall (RF)", initial=14.5)
     vertical_distance = forms.IntegerField(label="Vertical Distance (VD)", initial=180)
