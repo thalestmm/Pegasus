@@ -17,12 +17,12 @@ class CarpForm(forms.Form):
 
     # DADOS BALÍSTICOS
     chute_selection = forms.ChoiceField(choices=[
-        (1, "T-10 AC/RAC"),
-        (2, "T-10 C/D, MC1-1C, RALC"),
-        (3, "ASA"),
-        (4, "G11 A, G12 D"),
-        (5, "G13, G14"),
-        (6, "STAB")
+        (0, "T-10 AC/RAC"),
+        (1, "T-10 C/D, MC1-1C, RALC"),
+        (2, "ASA"),
+        (3, "G11 A, G12 D"),
+        (4, "G13, G14"),
+        (5, "STAB")
     ], initial=1, label="Tipo de Paraquedas")
     chute_amount      = forms.IntegerField(label="Quantidade de Paraquedas", initial=1)
     rate_of_fall      = forms.FloatField(label="Rate of Fall (RF)", initial=14.5)
