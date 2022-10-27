@@ -126,12 +126,14 @@ class CarpCalculator:
         launch_axis = []
         for i in range(12):
             course = self.mag_course + 30*i
-            if course > 360:
+            if course >= 360:
                 course-=360
-            if course < 100:
-                launch_axis.append(f'0{course}°')
             if course < 10:
                 launch_axis.append(f'00{course}°')
+                continue
+            if course < 100:
+                launch_axis.append(f'0{course}°')
+                continue
             else:
                 launch_axis.append(f'{course}°')
 
