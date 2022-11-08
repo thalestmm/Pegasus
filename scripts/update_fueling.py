@@ -9,7 +9,7 @@ def download_new_file():
 def run():
     filepath = 'scripts/data/Localidades_contratadas.xlsx'
 
-    df = pd.read_excel(filepath, "OUTUBRO 22 ")
+    df = pd.read_excel(filepath, "NOVEMBRO 22")
     # TODO: AUTO PICK THE MOST RECENT TABLE AVAILABLE
 
     icao = df.iloc[3:,3]
@@ -36,6 +36,8 @@ def run():
     fueling    = clean_df.fueling_available.items()
 
     for icao, fueling in zip(icao_signs, fueling):
+        if type(icao[1]) is not str:
+            continue
         airport = Airport.objects.get(icao_sign=icao[1])
         airport.has_fueling = fueling[1]
         airport.save()

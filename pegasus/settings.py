@@ -67,7 +67,7 @@ ROOT_URLCONF = 'pegasus.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [],
+        'DIRS': ['templates'],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -144,7 +144,7 @@ CRISPY_ALLOWED_TEMPLATE_PACKS = "bootstrap5"
 CRISPY_TEMPLATE_PACK = "bootstrap5"
 
 # DEPLOY CONFIG
-DEBUG = True
+DEBUG = False
 
 ADMINS = [('Thales', 'meier.thales@gmail.com')]
 
@@ -154,13 +154,13 @@ SESSION_COOKIE_SECURE = True
 
 SECURE_SSL_REDIRECT = False
 
-# TEST CONFIG
-
-DEBUG = True
-
-ADMINS = [('Thales', 'meier.thales@gmail.com')]
-
-SESSION_COOKIE_SECURE = False
-CSRF_COOKIE_SECURE = False
-SECURE_SSL_REDIRECT = False
+# # TEST CONFIG
+#
+# DEBUG = True
+#
+# ADMINS = [('Thales', 'meier.thales@gmail.com')]
+#
+# SESSION_COOKIE_SECURE = False
+# CSRF_COOKIE_SECURE = False
+# SECURE_SSL_REDIRECT = False
 
