@@ -156,11 +156,11 @@ SECURE_SSL_REDIRECT = False
 
 # TEST CONFIG
 
-# DEBUG = True
+DEBUG = True
 
-# ADMINS = [('Thales', 'meier.thales@gmail.com')]
+ADMINS = [('Thales', 'meier.thales@gmail.com')]
 
-# SESSION_COOKIE_SECURE = False
-# CSRF_COOKIE_SECURE = False
-# SECURE_SSL_REDIRECT = False
+SESSION_COOKIE_SECURE = False
+CSRF_COOKIE_SECURE = True
+SECURE_SSL_REDIRECT = False
 
