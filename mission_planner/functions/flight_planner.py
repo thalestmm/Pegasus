@@ -94,10 +94,22 @@ class FlightPlan:
 
         return float(haversine(coords_1, coords_2, unit=Unit.NAUTICAL_MILES))
 
-    @staticmethod
-    def find_nearest_alternative(arr_ICAO: str):
-        # TODO: ADD NEAREST ATN LOGIC
-        return 'SBCO'
+    def find_nearest_alternative(self, arr_ICAO: str):
+        # TODO: ADD NEAREST ALTN LOGIC
+        available_fueling_airports = Airport.objects.all().filter(has_fueling=True)
+
+        nearest_airport = ("SBCO", float('inf'))
+
+        for airport in available_fueling_airports:
+            if airport.__str__() == arr_ICAO:
+                nearest_airport = nearest_airport
+            else:
+                distance = self.get_distance(arr_ICAO, airport)
+
+                if distance < nearest_airport[1]:
+                    nearest_airport = (airport, distance)
+
+        return nearest_airport[0].__str__()
 
     def list_all_airports_from_fpl(self):
         pass
@@ -157,6 +169,9 @@ class FlightPlan:
     def leg_full_execution(self, org_ICAO: str, des_ICAO: str, alt_ICAO: str):
         if org_ICAO == '' or des_ICAO == '':
             return None
+
+        if alt_ICAO == '':
+            alt_ICAO = self.find_nearest_alternative(des_ICAO)
 
         main_distance = self.get_distance(org_ICAO, des_ICAO)
 
@@ -237,7 +252,7 @@ class FlightPlan:
             'des_has_fueling': des_has_fueling,
             'altn_has_fueling': altn_has_fueling
         }
-
+        self.find_nearest_alternative("SNXX")
         return export_dict
 
     def __str__(self):
