@@ -4,8 +4,8 @@ from .models import Airport, Project
 # Register your models here.
 
 
-class MyAdminSite(admin.AdminSite):
-    site_header = "Pegasus Admin"
+# class MyAdminSite(admin.AdminSite):
+#     site_header = "Pegasus Admin"
 
 
 admin.site.register(Airport)
