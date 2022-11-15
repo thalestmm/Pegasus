@@ -42,10 +42,9 @@
 
     <br>
     <h3 class="text-center">Rota</h3>
-    <p class="text-center" style="font-weight: 300; font-size: 12px; color: #FBFBFB;">
+    <p class="text-center" style="font-weight: 300; font-size: 12px; color: #FBFBFB; padding-bottom: 10px;">
         <em>OBS: Devido às limitações do servidor, recomenda-se um limite de 5 pernas por planejamento.</em>
     </p>
-    <br>
     <div class="table-wrapper container-fluid">
     <table id="RouteTable" class="table table-dark table-striped align-middle">
         <thead>
@@ -83,20 +82,29 @@
     </table>
     </div>
     <br>
-    <div class="d-grid col-8 mx-auto" id="updates">
 
-                <span class="badge text-bg-info text-center">NOVO</span>
-                <span><p class="text-center" style="font-size: 12px; margin-top: 4px;">Agora você pode deixar o campo <strong>ALTN</strong> em branco para que seja selecionado o aeroporto mais próximo que possui abastecimento.</p></span>
-
-    </div>
     <div class="d-grid col-1 mx-auto">
       <button id="addRow" class="btn btn-light btn-sm" style="border-radius: 12px;" type="button">
           +
       </button>
     </div>
-
     <br>
+        <div class="d-grid col-8 mx-auto" id="updates">
 
+                <span class="badge text-bg-info text-center">NOVO</span>
+                <span><p class="text-center" style="font-size: 12px; margin-top: 4px;">Agora você pode deixar o campo <strong>ALTN</strong> em branco para que seja selecionado o aeroporto mais próximo que possui abastecimento.</p></span>
+
+    </div>
+    <div class="d-grid gap-2 col-4 mx-auto" id="checkboxes" style="padding-bottom: 15px;">
+    <div class="form-check form-switch">
+      <input class="form-check-input" type="checkbox" id="NotamCheckbox" name="NotamCheckbox">
+      <label class="form-check-label" for="NotamCheckbox">NOTAM</label>
+    </div>
+    <div class="form-check form-switch">
+      <input class="form-check-input" type="checkbox" id="MetarCheckbox" name="MetarCheckbox">
+      <label class="form-check-label" for="MetarCheckbox">METAR / TAF</label>
+    </div>
+    </div>
     <div class="d-grid gap-2 col-4 mx-auto">
       <button class="btn btn-warning" type="submit">Enviar</button>
     </div>

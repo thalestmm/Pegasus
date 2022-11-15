@@ -12,6 +12,7 @@ from django.shortcuts import Http404
 
 from django.views.decorators.csrf import csrf_protect
 
+
 # Create your views here.
 
 
@@ -19,8 +20,8 @@ from django.views.decorators.csrf import csrf_protect
 def planner_form(request):
     available_projects = Project.objects.all()
 
-    airport_form       = AirportInputField()
-    rows_to_render     = range(1)
+    airport_form = AirportInputField()
+    rows_to_render = range(1)
 
     if request.method == "POST":
         # TODO: ADD VALIDATION BEFORE SUBMITTING TO CHECK IF ALL THE ICAO ARE ON
@@ -61,6 +62,8 @@ def render_mission(request, form_data, package):
 
     package_dict = {c[0]: c[1] for c in package}
 
+    print(package_dict)
+
     for key in extra_data:
         package_dict.pop(key)
 
@@ -73,28 +76,42 @@ def render_mission(request, form_data, package):
         )
 
         # DATA PAYLOADS FROM API
-        data_package    = {} # A DICT OF DICTS
+        data_package = {}  # A DICT OF DICTS
         meteoro_package = {}
-        hours_package   = {}
+        hours_package = {}
 
-        gramet_scraper = GrametScraper(icao_route=fp.icao_route)
-        gramet_url     = gramet_scraper.gramet_url
+        # gramet_scraper = GrametScraper(icao_route=fp.icao_route)
+        # gramet_url     = gramet_scraper.gramet_url
 
-        empty_list      = []
+        empty_list = []
+
+        try:
+            if package_dict['NotamCheckbox'] == 'on':
+                notam = True
+        except KeyError:
+            notam = False
+
+        try:
+            if package_dict['MetarCheckbox'] == 'on':
+                metar = True
+        except KeyError:
+            metar = False
 
         for airport in fp.all_fpl_airports:
-            api = DeceaApiConnection()
-            api.get_notam_from_icao(airport)
+            if notam:
+                api = DeceaApiConnection()
+                api.get_notam_from_icao(airport)
 
-            if len(api.data_output) == 0:
-                data_package[airport] = [False]
-            else:
-                data_package[airport] = api.data_output
+                if len(api.data_output) == 0:
+                    data_package[airport] = [False]
+                else:
+                    data_package[airport] = api.data_output
 
-            api = DeceaApiConnection()
-            api.get_meteoro_data_from_icao(airport)
+            if metar:
+                api = DeceaApiConnection()
+                api.get_meteoro_data_from_icao(airport)
 
-            meteoro_package[airport] = api.data_output
+                meteoro_package[airport] = api.data_output
 
         return render(request, "mission_planner/render_mission.html",
                       {"project": header['project'],
@@ -105,10 +122,11 @@ def render_mission(request, form_data, package):
                        "data_package": zip(data_package.keys(), data_package.items()),
                        "empty_list": empty_list,
                        "meteoro_package": zip(meteoro_package.keys(), meteoro_package.items()),
-                       'gramet_url': False})
+                       'gramet_url': False,
+                       'with_notam': notam,
+                       'metar': metar})
 
     except IndexError:
         # TODO: HANDLE MISSING ICAO TO EXPLAIN WHY THE STATUS WAS RAISED
         print(e)
         raise Http404()
-
