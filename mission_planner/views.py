@@ -62,8 +62,6 @@ def render_mission(request, form_data, package):
 
     package_dict = {c[0]: c[1] for c in package}
 
-    print(package_dict)
-
     for key in extra_data:
         package_dict.pop(key)
 
