@@ -7,9 +7,12 @@ def download_new_file():
 
 
 def run():
+    # CLEAR ALL FUELING DATA ON DB FOR SAFETY
+    Airport.objects.all().update(has_fueling=False)
+
     filepath = 'scripts/data/Localidades_contratadas.xlsx'
 
-    df = pd.read_excel(filepath, "NOVEMBRO 22")
+    df = pd.read_excel(filepath, "DEZEMBRO 22 ")
     # TODO: AUTO PICK THE MOST RECENT TABLE AVAILABLE
 
     icao = df.iloc[3:,3]
