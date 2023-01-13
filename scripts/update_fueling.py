@@ -1,5 +1,6 @@
 from mission_planner.models import Airport
 import pandas as pd
+import logging
 
 
 def download_new_file():
@@ -12,7 +13,7 @@ def run():
 
     filepath = 'scripts/data/Localidades_contratadas.xlsx'
 
-    df = pd.read_excel(filepath, "DEZEMBRO 22 ")
+    df = pd.read_excel(filepath, "JANEIRO 23 ")
     # TODO: AUTO PICK THE MOST RECENT TABLE AVAILABLE
 
     icao = df.iloc[3:,3]
@@ -44,3 +45,5 @@ def run():
         airport = Airport.objects.get(icao_sign=icao[1])
         airport.has_fueling = fueling[1]
         airport.save()
+
+    logging.info("Done!")
