@@ -13,7 +13,7 @@ def run():
 
     filepath = 'scripts/data/Localidades_contratadas.xlsx'
 
-    df = pd.read_excel(filepath, "JANEIRO 23 ")
+    df = pd.read_excel(filepath, "ABRIL 23")
     # TODO: AUTO PICK THE MOST RECENT TABLE AVAILABLE
 
     icao = df.iloc[3:,3]
