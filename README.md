@@ -3,7 +3,7 @@
 <p>We're live! Visit <a href="http://www.pegaso.dev/" target="_blank">pegaso.dev</a>.</p>
 
 Tech Stack:
-- Python Django
+- Django
 - Sqlite3
 - Jinja Template Engine
 - Bootstrap CSS
